@@ -42,15 +42,11 @@ target_whitelist_rows:	2	3	8
 Result in the following R list
 ```
 $group_set_columns
-[1] NA
-
-$Set1
+$group_set_columns$Set1
 [1] "331 sample" "339 sample"
 
 $rules
-[1] NA
-
-$max_allowed
+$rules$max_allowed
 [1] 7
 
 $target_whitelist_rows
