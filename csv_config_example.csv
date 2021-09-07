@@ -1,0 +1,13 @@
+# how to use,,,,,,
+,,,,,,
+group_set_columns:,,,,,,
+,Set1:,[1] 331 sample.Quantity.cal1,[2] 339 sample.Quantity.cal1,[3] 378 sample.Quantity.cal1,[4] 403 sample.Quantity.cal1,[5] 412 sample.Quantity.cal1
+,Set2:,[11] 434 sample.Quantity.cal1,[12] 436 sample.Quantity.cal1,[13] 437 sample.Quantity.cal1,[14] 439 sample.Quantity.cal1,[15] 447 sample.Quantity.cal1
+,,,,,,
+rules:,,,,,,
+# sample comment on rules,,,,,,
+,min_allowed: ,3,,,,
+,max_allowed: ,7,,,,
+,,,,,,
+# target whitelist,,,,,,
+target_whitelist_rows:,2,3,8,12,,
