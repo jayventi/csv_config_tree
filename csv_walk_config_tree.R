@@ -16,8 +16,7 @@ key_sufx = ':' #  key name suffix character
 # cvs config helpers ## main funtion > walk_csv_config_tree ###################
 
 # csv string handling and parsing functions
-# TODO move all csv helper functions into a CSVWalkConfigTree()
-is_comment_str =  function(x, com_chr= comt_chr) {
+is_comment_str =  function(x, com_chr='#') {
   x_trim = str_trim(x, "left")
   result = (str_sub(x_trim,1,1) == com_chr)
   return(result)
@@ -31,9 +30,7 @@ is_na_or_whitespace = function(x) {
   return(result)
 }
 
-is_key = function(x) {
-  rexp_str = paste('\\', key_sufx, '$', sep='')
-  return(grepl(rexp_str, x))} # "\\:$"
+is_key = function(x) {return(grepl("\\:$", x))}
 
 get_key_nam = function(x, com_chr='\\:') {
   x_trim = str_trim(x, "left")
@@ -76,18 +73,17 @@ get_list_from_row = function(row, key_inx) {
   result = list()
   key_nam = ''
   v_out = vector()
-  regx_key_sufx = paste('\\', key_sufx, sep='')
-  key_nam = get_key_nam(row[key_inx], com_chr=regx_key_sufx)
+  key_nam = get_key_nam(row[key_inx])
   for(inx in (key_inx+1):length(row) ){
     if (! is_na_or_whitespace(row[inx])){
       if (!is.na(suppressWarnings(as.numeric(row[inx])))){
         v_out[inx-key_inx] = as.integer(row[inx])
       } else {
-        v_out[inx-key_inx] = row[inx]
+        v_out[inx-key_inx] = (row[inx])
       } 
     }
   }
-  if (!length(v_out)==0){ result[[key_nam]] = v_out} else { result[[key_nam]] = NA}
+  result[[key_nam]] = v_out
   return(result)
 }
 
@@ -136,10 +132,10 @@ walk_csv_config_tree = function(raw_csv_config) {
   key_inx = 1
   core_csv_list = delete_comment_or_blank(raw_csv_config)
   for (line_n in 1:nrow(core_csv_list)){
-  raw_line = core_csv_list[line_n,]
+    raw_line = core_csv_list[line_n,]
     last_key_inx = key_inx # track last, current
     key_inx = get_key_index(raw_line)
-    line_list = get_list_from_row(raw_line, key_inx) 
+    line_list = get_list_from_row(raw_line, key_inx)
     key_nam = get_key_nam(raw_line[key_inx])
     if (key_inx < last_key_inx ){ # go towards root
       working = get_n_parent(m, working)
@@ -147,9 +143,9 @@ walk_csv_config_tree = function(raw_csv_config) {
         working = paste(working,'[["',key_nam,'"]]',sep = "") # setup new working
       }
     } else if (length(line_list[[1]]) == 0){ # go away from root
-        parent = working
-        working = paste(working,'[["',key_nam,'"]]',sep = "") # setup new working
-        m = set_n_parent(n, working, parent) # set parent = working
+      parent = working
+      working = paste(working,'[["',key_nam,'"]]',sep = "") # setup new working
+      m = set_n_parent(n, working, parent) # set parent = working
     }
     if (length(line_list[[1]]) > 0) { # is it a leaf node then process it
       n = set_n_leaf(n, working, key_nam, line_list) }
