@@ -14,9 +14,9 @@ config = walk_csv_config_tree(raw_csv_config)
 ```
 ## Arguments
 
-| | | | |
-| ---------------- | -- | --| --------- |
-| raw_csv_config | | | A dataframe importation of the configuration csv  |
+| |  |
+| ---------------- | --------- |
+| raw_csv_config | A dataframe importation of the configuration csv  |
 
 ## Details
 The, R lists are interpretable as hierarchical trees in a format similar to yamal files except that the leaf level element are written as R lists, and the leaf list elements are written out as sequentially lists horizontally after the key name one element for each column. The format follows the key
