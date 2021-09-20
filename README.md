@@ -2,9 +2,8 @@
 R script takes a csv configuration file layout similar to a yaml file and returns a R list
 
 ## Description
-This R function takes as input a csv spreadsheet as a dataframe formatted in a similar mmanner to
-a yamal files and produces a R list data type matching csv configuration format. The format allows
-ignoring blank rows and comment lines indicated by #. 
+This R function takes as input a csv spreadsheet as a dataframe formatted in a similar manner to
+a yamal file and produces a R list data type matching csv configuration format. The format allows ignoring blank rows and comment lines indicated by #. 
 
 
 ## Usage
@@ -19,7 +18,7 @@ config = walk_csv_config_tree(raw_csv_config)
 | raw_csv_config | A dataframe importation of the configuration csv  |
 
 ## Details
-The, R lists are interpretable as hierarchical trees in a format similar to yamal files except that the leaf level element are written as R lists, and the leaf list elements are written out as sequentially lists horizontally after the key name one element for each column. The format follows the key
+The R lists are interpreted as hierarchical trees in a format similar to yamal files except that the leaf level element are written as R lists, and the leaf list elements are written out as sequential list horizontally after the key name one element for each column. The format follows the key
 value arrangement, the first element is the key indicated by a ':' character suffix, in the case of internal notes each node is indented one column to the right from its parent given
 in the above row.
 
@@ -28,7 +27,7 @@ This is csv configuration format is intended to be used in laboratories using bi
 
 ## Formatting Examples
 
-A configuration CSV file laidout as follows
+A configuration CSV file laid out as follows
 
 ```
 group_set_columns:			
